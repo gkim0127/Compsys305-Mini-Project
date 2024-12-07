@@ -1,0 +1,75 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.all;
+USE  IEEE.STD_LOGIC_ARITH.all;
+USE  IEEE.STD_LOGIC_SIGNED.all;
+
+entity mode_display is
+	port(	pixel_row, pixel_col: IN std_logic_vector(9 downto 0);
+			state : IN std_logic_vector(2 downto 0);
+			character_address: OUT std_logic_vector(5 downto 0);
+			font_row, font_col: OUT std_logic_vector(2 downto 0));
+end entity;
+
+-- if state is 00 main menu
+-- if state is 01 training mode
+-- if state is 10 game mode
+-- if state is 11 game over
+
+architecture mode_display is 
+ begin
+	component char_rom 
+			port(
+					character_address	:	in std_logic_vector (5 downto 0);
+					font_row, font_col	:	in std_logic_vector (2 downto 0);
+					clock				: 	in std_logic ;
+					rom_mux_output		:	out std_logic);
+	end component;
+
+	process(pixel_col, pixel_row, state)
+		begin
+			-- menu
+			if state = "00" then 
+				-- T
+				if pixel_col >= std_logic_vector(to_unsigned(200,)) and
+					pixel_col >= std_logic_vector(to_unsigned(250, 10)) and
+					pixel_row >= std_logic_vector(to_unsigned(300, 10)) and
+					pixel_row <= std_logic_vector(to_unsigned(330, 10)) then
+				   character_address <="010100" ; 
+				-- R
+				if pixel_col >= std_logic_vector(to_unsigned(250, 10)) and
+					pixel_col >= std_logic_vector(to_unsigned(280, 10)) and
+					pixel_row >= std_logic_vector(to_unsigned(300, 10)) and
+					pixel_row <= std_logic_vector(to_unsigned(330, 10)) then
+				   character_address <="010100" ; 
+				-- T
+				if pixel_col >= std_logic_vector(to_unsigned(280, 10)) and
+					pixel_col >= std_logic_vector(to_unsigned(310, 10)) and
+					pixel_row >= std_logic_vector(to_unsigned(300, 10)) and
+					pixel_row <= std_logic_vector(to_unsigned(330, 10)) then
+				   character_address <="010100" ; 
+				-- T
+				if pixel_col >= std_logic_vector(to_unsigned(310, 10)) and
+					pixel_col >= std_logic_vector(to_unsigned(250, 10)) and
+					pixel_row >= std_logic_vector(to_unsigned(300, 10)) and
+					pixel_row <= std_logic_vector(to_unsigned(330, 10)) then
+				   character_address <="010100" ; 
+				-- T
+				if pixel_col >= std_logic_vector(to_unsigned(220, 10)) and
+					pixel_col >= std_logic_vector(to_unsigned(250, 10)) and
+					pixel_row >= std_logic_vector(to_unsigned(300, 10)) and
+					pixel_row <= std_logic_vector(to_unsigned(330, 10)) then
+				   character_address <="010100" ; 
+				
+
+
+
+
+
+					
+					
+					
+					
+					
+					
+font_row<=pixel_row(4 downto 2);
+font_col<=pixel_col(4 downto 2);
