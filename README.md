@@ -1,4 +1,4 @@
-# Compsys305-Mini-Project
+
 Compsys 305 course project- game development
 
 ## Flappy bird game development 
